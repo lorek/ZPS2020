@@ -11,11 +11,11 @@ Example:
 import argparse
 import os
 import pickle
-from typing import Any, Sequence
+from shutil import copyfile
+from typing import Sequence
 
 import numpy as np
 import pandas as pd
-
 
 INPUT_FILENAMES = ["train_data.pkl", "test_data.pkl"]
 
@@ -46,14 +46,20 @@ def read_serialized_dataset(path):
 
 
 def save_dataset(
-    x_array: np.ndarray,
-    y_array: np.ndarray,
-    path: str,
+        x_array: np.ndarray,
+        y_array: np.ndarray,
+        path: str,
 ):
     data_dict = dict(data=x_array, classes=y_array)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "wb") as file_stream:
         pickle.dump(data_dict, file_stream, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+def copy_dataset(input_dir: str, output_dir: str, filename='class_names.pkl'):
+    src = os.path.join(input_dir, filename)
+    dst = os.path.join(output_dir, filename)
+    copyfile(src, dst)
 
 
 def create_one_hot_features_df(features_df: pd.DataFrame, features_classes: Sequence[int]):
@@ -95,6 +101,7 @@ def run_script(input_dir, output_dir, categorical_features_indexes, categorical_
         process_script_for_file(
             input_dir, output_dir, filename, categorical_features_indexes, categorical_features_classes
         )
+    copy_dataset(input_dir, output_dir, "class_names.pkl")
 
 
 if __name__ == "__main__":
