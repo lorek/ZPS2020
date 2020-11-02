@@ -45,28 +45,27 @@ def read_serialized_dataset(path):
         return saved_data['data'], saved_data['classes']
 
 
-def save_dataset_slice(dataset_slice: Any, output_dir: str, filename: str):
-    output_dir = os.path.abspath(output_dir)
-    os.makedirs(output_dir, exist_ok=True)
-
-    output_path = os.path.join(output_dir, f"{filename}.pkl")
-    with open(output_path, "wb") as handle:
-        pickle.dump(dataset_slice, handle, protocol=pickle.HIGHEST_PROTOCOL)
-
-
 def save_dataset(
-    x_train: np.ndarray,
-    y_train: np.ndarray,
-    x_test: np.ndarray,
-    y_test: np.ndarray,
-    classes: np.ndarray,
-    output_dir: str,
+    x_array: np.ndarray,
+    y_array: np.ndarray,
+    path: str,
 ):
-    x_train_all_dict = dict(data=x_train, classes=y_train)
-    save_dataset_slice(x_train_all_dict, output_dir, "train_data")
-    x_test_all_dict = dict(data=x_test, classes=y_test)
-    save_dataset_slice(x_test_all_dict, output_dir, "test_data")
-    save_dataset_slice(classes, output_dir, "class_names")
+    data_dict = dict(data=x_array, classes=y_array)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "wb") as file_stream:
+        pickle.dump(data_dict, file_stream, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+def create_one_hot_features_df(features_df: pd.DataFrame, features_classes: Sequence[int]):
+    columns = list(features_df.columns)
+    one_hot_dataframes = []
+    for column, feature_classes in zip(columns, features_classes):
+        feature_array = np.array(features_df[column])
+        one_hot_array = np.zeros(shape=(feature_array.shape[0], feature_classes))
+        one_hot_array[np.arange(feature_array.shape[0]), feature_array] = 1.0
+        feature_columns = [f'{column}_{feature_class}' for feature_class in range(feature_classes)]
+        one_hot_dataframes.append(pd.DataFrame(one_hot_array, columns=feature_columns))
+    return pd.concat(one_hot_dataframes, axis=1)
 
 
 def process_script_for_file(
@@ -82,6 +81,11 @@ def process_script_for_file(
     categorical_features_df = features_df[categorical_features_indexes]
     continuous_features_indexes = list(set(features_df.columns).difference(categorical_features_indexes))
     continuous_features_df = features_df[continuous_features_indexes]
+    one_hot_features_df = create_one_hot_features_df(categorical_features_df, categorical_features_classes)
+    converted_features_df = pd.concat([continuous_features_df, one_hot_features_df], axis=1)
+    converted_x_array = converted_features_df.to_numpy()
+    output_path = os.path.join(output_dir, filename)
+    save_dataset(converted_x_array, y_array, output_path)
 
 
 def run_script(input_dir, output_dir, categorical_features_indexes, categorical_features_classes):
