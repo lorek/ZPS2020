@@ -3,8 +3,8 @@ Author: Dawid Wegner
 Group: z1
 
 Example:
-    $ python scripts/z1_prepare_data_adult.py --input-dir datasets_prepared/adult/ --input-files train_data.pkl \
-        test_data.pkl --output-dir datasets_prepared/adult_one_hot/ --categorical-features-indexes 0 1 2 3 4 5 6 7 8 \
+    $ python scripts/z1_prepare_data_adult.py --input-dir datasets_prepared/adult/ \
+        --output-dir datasets_prepared/adult_one_hot/ --categorical-features-indexes 0 1 2 3 4 5 6 7 8 \
         --categorical-features-classes 5 5 5 5 5 5 5 5 5
 """
 
@@ -15,7 +15,9 @@ from typing import Any, Sequence
 
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
+
+
+INPUT_FILENAMES = ["train_data.pkl", "test_data.pkl"]
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -25,9 +27,6 @@ def parse_arguments() -> argparse.Namespace:
     )
     parser.add_argument(
         "--output-dir", required=True, type=str, help="Output directory"
-    )
-    parser.add_argument(
-        "--input-files", nargs="+", required=True, type=str, help="The names of files that will be processed"
     )
     parser.add_argument(
         "--categorical-features-indexes", nargs="+", type=int, required=True,
@@ -85,20 +84,15 @@ def process_script_for_file(
     continuous_features_df = features_df[continuous_features_indexes]
 
 
-def run_script():
-    input_args = parse_arguments()
-    if len(input_args.categorical_features_classes) != len(input_args.categorical_features_indexes):
+def run_script(input_dir, output_dir, categorical_features_indexes, categorical_features_classes):
+    if len(categorical_features_classes) != len(categorical_features_indexes):
         raise ValueError("The number of features classes must match the number of features indexes")
-    for filename in input_args.input_files:
+    for filename in INPUT_FILENAMES:
         process_script_for_file(
-            input_args.input_dir,
-            input_args.output_dir,
-            filename,
-            input_args.categorical_features_indexes,
-            input_args.categorical_features_classes,
+            input_dir, output_dir, filename, categorical_features_indexes, categorical_features_classes
         )
 
 
 if __name__ == "__main__":
-    run_script()
-
+    args = parse_arguments()
+    run_script(args.input_dir, args.output_dir, args.categorical_features_indexes, args.categorical_features_classes)
