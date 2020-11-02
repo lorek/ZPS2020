@@ -10,7 +10,8 @@ import argparse
 import logging
 import os
 import pickle
-from typing import Any, Tuple
+from typing import Any
+from typing import Tuple
 
 import numpy as np
 import pandas as pd
@@ -32,7 +33,7 @@ def process_data(data_df: pd.DataFrame) -> pd.DataFrame:
 
 def convert_data(data_df: pd.DataFrame) -> Tuple[np.ndarray, np.ndarray]:
     data_all = data_df.to_numpy()
-    data = data_all[:, 1:]
+    data = data_all[:, :-1]
     data_classes = data_all[:, -1]
     return data, data_classes
 
@@ -47,12 +48,12 @@ def save_obj(obj: Any, output_dir: str, filename: str):
 
 
 def save_data(
-    X_train: np.ndarray,
-    y_train: np.ndarray,
-    X_test: np.ndarray,
-    y_test: np.ndarray,
-    classes: np.ndarray,
-    output_dir: str,
+        X_train: np.ndarray,
+        y_train: np.ndarray,
+        X_test: np.ndarray,
+        y_test: np.ndarray,
+        classes: np.ndarray,
+        output_dir: str,
 ):
     X_train_all_dict = dict(data=X_train, classes=y_train)
     save_obj(X_train_all_dict, output_dir, "train_data")
