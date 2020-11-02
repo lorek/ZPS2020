@@ -36,6 +36,10 @@ def parse_arguments() -> argparse.Namespace:
         "--categorical-features-classes", nargs="+", type=int, required=True,
         help="The number of classes of categorical features"
     )
+    parser.add_argument(
+        "--first-class", default=0, type=int, required=False,
+        help="First class of integer-encoded attribute (0 or 1)"
+    )
     return parser.parse_args()
 
 
@@ -80,11 +84,12 @@ def process_script_for_file(
         filename: str,
         categorical_features_indexes: Sequence[int],
         categorical_features_classes: Sequence[int],
+        first_class: int = 0
 ):
     input_path = os.path.join(input_dir, filename)
     x_array, y_array = read_serialized_dataset(input_path)
     features_df = pd.DataFrame(x_array)
-    categorical_features_df = features_df[categorical_features_indexes]
+    categorical_features_df = features_df[categorical_features_indexes] - first_class
     continuous_features_indexes = list(set(features_df.columns).difference(categorical_features_indexes))
     continuous_features_df = features_df[continuous_features_indexes]
     one_hot_features_df = create_one_hot_features_df(categorical_features_df, categorical_features_classes)
@@ -94,16 +99,17 @@ def process_script_for_file(
     save_dataset(converted_x_array, y_array, output_path)
 
 
-def run_script(input_dir, output_dir, categorical_features_indexes, categorical_features_classes):
+def run_script(input_dir, output_dir, categorical_features_indexes, categorical_features_classes, first_class=0):
     if len(categorical_features_classes) != len(categorical_features_indexes):
         raise ValueError("The number of features classes must match the number of features indexes")
     for filename in INPUT_FILENAMES:
         process_script_for_file(
-            input_dir, output_dir, filename, categorical_features_indexes, categorical_features_classes
+            input_dir, output_dir, filename, categorical_features_indexes, categorical_features_classes, first_class
         )
     copy_dataset(input_dir, output_dir, "class_names.pkl")
 
 
 if __name__ == "__main__":
     args = parse_arguments()
-    run_script(args.input_dir, args.output_dir, args.categorical_features_indexes, args.categorical_features_classes)
+    run_script(args.input_dir, args.output_dir, args.categorical_features_indexes, args.categorical_features_classes,
+               args.first_class)
