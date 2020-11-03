@@ -68,6 +68,8 @@ df = pd.read_csv(input_dir+"/hcc_survival_z3_data.txt", sep=",")
 
 #JEST 50 kolumn, ostatnia to - 50. to klasyfikator
 
+df = df.replace(['?'], np.NaN)
+
 # Zamieniamy DataFrame (df) na macierz numpy
 
 data_all = df.to_numpy()
