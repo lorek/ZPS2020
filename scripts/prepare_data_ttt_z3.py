@@ -62,8 +62,12 @@ input_dir, output_dir, test_size_fraction   = ParseArguments()
 
 test_size_fraction = float(test_size_fraction)
 
-# wczytaj plik nursery.data
-df = pd.read_table(input_dir+"/tic-tac-toe.data.data", sep=",", header=None)
+
+# wczytaj plik tic-tac-toe.data
+df = pd.read_table(input_dir+"/tic-tac-toe.data", sep=",", header=None)
+
+#wartosci kazdej z cech sa numerowane kolejnymi liczbami naturalnymi poczawszy od 0
+df = df.apply(lambda x: pd.factorize(x)[0])
 
 #JEST 9 kolumn, ostatnia to klasyfikator
 
@@ -73,11 +77,11 @@ data_all = df.to_numpy()
 
 # pierwsze 9 kolumn to dane:
 
-data = data_all[:,:9] # = wszystkie wiersze, kolumny do 9.
+data = data_all[:,:-1] # = wszystkie wiersze, kolumny do 9.
 
 # ostatnia kolumna to klasy:
 
-data_classes = data_all[:,9] # = wszystkie wiersze, kolumna 10
+data_classes = data_all[:,-1] # = wszystkie wiersze, kolumna 10
 
 # nazwy klas -- damy tutaj wszystkie unikalne numery, ktore wystepuja w data_classes
 
