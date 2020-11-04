@@ -1,0 +1,23 @@
+z2
+
+----------------------------
+
+https://archive.ics.uci.edu/ml/datasets/Hayes-Roth
+
+
+----------------------------
+
+Number of Instances:
+
+160
+
+----------------------------
+
+Attribute Information:
+
+-- 1. name: distinct for each instance and represented numerically
+-- 2. hobby: nominal values ranging between 1 and 3
+-- 3. age: nominal values ranging between 1 and 4
+-- 4. educational level: nominal values ranging between 1 and 4
+-- 5. marital status: nominal values ranging between 1 and 4
+-- 6. class: nominal value between 1 and 3
