@@ -1,0 +1,57 @@
+Grupa: z1
+Czlonkowie: Tomasz Nanowski, Dawid Wegner
+
+### Skrypt: z1_prepare_data_adult.py
+Konwertuje zbior danych Adult do ustalonego formatu i stosuje kodowanie Integer
+
+Parametry:
+--input-dir: Ścieżka do folderu z surowymi danymi
+--output-dir: Ścieżka do wynikowego folderu
+--fraction: Rozmiar zbioru treningowego
+
+Przyklad:
+$ python scripts/z1_prepare_data_adult.py --input-dir datasets/adult/ --output-dir datasets_prepared/adult/
+
+### Skrypt: z1_prepare_data_mushroom.py
+Konwertuje zbior danych Mushroom do ustalonego formatu i stosuje kodowanie Integer
+
+Parametry:
+--input-dir: Ścieżka do folderu z surowymi danymi
+--output-dir: Ścieżka do wynikowego folderu
+--fraction: Rozmiar zbioru treningowego
+
+Przyklad:
+$ python scripts/z1_prepare_data_mushroom.py --input-dir datasets/mushroom/ --output-dir datasets_prepared/mushroom
+
+### Skrypt: z1_prepare_data_adult_one_hot.py
+Konwertuje zbiór Adult zakodowany w formacie Integer do One-hot
+
+Parametry:
+--input-dir: Ścieżka do folderu ze zbiorem Adult zakodowanym w formacie Integer
+--output-dir: Ścieżka do wynikowego folderu
+
+Przykład:
+$ python scripts/z1_prepare_data_adult_one_hot.py --input-dir datasets_prepared/adult \
+    --output-dir datasets_prepared/adult_one_hot
+
+### Skrypt: z1_prepare_data_car_one_hot.py
+Konwertuje zbiór Car zakodowany w formacie Integer do One-hot
+
+Parametry:
+--input-dir: Ścieżka do folderu ze zbiorem Car zakodowanym w formacie Integer
+--output-dir: Ścieżka do wynikowego folderu
+
+Przykład:
+$ python scripts/z1_prepare_data_car_one_hot.py --input-dir datasets_prepared/z2/car_int_prepared \
+    --output-dir datasets_prepared/car_one_hot
+
+### Skrypt: z1_prepare_data_tae_one_hot.py
+Konwertuje zbiór Teaching Assistant Evaluation zakodowany w formacie Integer do One-hot
+
+Parametry:
+--input-dir: Ścieżka do folderu ze zbiorem Teaching Assistant Evaluation zakodowanym w formacie Integer
+--output-dir: Ścieżka do wynikowego folderu
+
+Przykład:
+$ python scripts/z1_prepare_data_tae_one_hot.py --input-dir datasets_prepared/teaching_assistant_evaluation \
+    --output-dir datasets_prepared/teaching_assistant_evaluation_one_hot
