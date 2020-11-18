@@ -1,0 +1,40 @@
+W katalogu głównym projektu, --input i --output dirs pliki wejścia i wyjścia
+
+
+Prepare car dataset integer encoding
+Example:
+
+$ python scripts/z2/z2_prepare_data_car_int.py --input-dir datasets/z2/car/ --output-dir datasets_prepared/z2/car_int_prepared/
+
+Simple presentation:
+$ python scripts_learn/classify_simple.py --input-dir datasets_prepared/z2/car_int_prepared/
+
+
+
+Prepare car dataset variant binary encoding
+Example:
+
+$ python scripts/z2/z2_prepare_data_car_binary.py --input-dir datasets/z2/car/ --output-dir datasets_prepared/z2/car_binary_prepared/
+
+Simple presentation:
+$ python scripts_learn/classify_simple.py --input-dir datasets_prepared/z2/car_binary_prepared/
+
+
+
+Prepare car dataset variant hashing encoding
+Example:
+
+$ python scripts/z2/z2_prepare_data_car_hashing.py --input-dir datasets/z2/car/ --output-dir datasets_prepared/z2/car_hashing_prepared/
+
+Simple presentation:
+$ python scripts_learn/classify_simple.py --input-dir datasets_prepared/z2/car_hashing_prepared/
+
+
+
+Prepare Hayes-Roth dataset
+Example:
+
+$ python scripts/z2/z2_prepare_data_hayes_roth.py --input-dir datasets/z2/Hayes-Roth/ --output-dir datasets_prepared/z2/Hayes-Roth_prepared/
+
+Simple presentation:
+$ python scripts_learn/classify_simple.py --input-dir datasets_prepared/z2/Hayes-Roth_prepared/
