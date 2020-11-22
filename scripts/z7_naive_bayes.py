@@ -14,11 +14,12 @@ import argparse
 from sklearn.model_selection import train_test_split
 import pickle 
 
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB, MultinomialNB, CategoricalNB, BernoulliNB
+from mixed_naive_bayes import MixedNB
+from sklearn.preprocessing import LabelEncoder
 
-# przyklad: python scripts/z7_naive_bayes.py --input-dir datasets_prepared/haberman
+
+# przyklad: python scripts/z7_naive_bayes.py --input-dir datasets_prepared/haberman --data-type cat
 
 def read_data(input_dir):
     # wczytujemy dane treningowe:
@@ -46,16 +47,19 @@ def read_data(input_dir):
 
 def ParseArguments():
     parser = argparse.ArgumentParser(description="Project")
-    parser.add_argument('--input-dir', default="", required=True, help='input dir (default: %(default)s)')
+    parser.add_argument('--input-dir', default="", required=True,
+                        help='input dir (default: %(default)s)')
+    parser.add_argument('--data-type', default="cat", required=False,
+                        help='data type - possible types: cat(categorical), cont(continuous), bern(Bernoulli),\
+                        multin(multinomial), cant-cont, (default: %(default)s)')
+    parser.add_argument('--disc-col', default="", required=False,
+                        help='discrete columns numbers (default: %(default)s)')
     args = parser.parse_args()
 
-    return args.input_dir
+    return args.input_dir, args.data_type, args.disc_col
         
-input_dir = ParseArguments()
-    
-
+input_dir, data_type, disc_col = ParseArguments()
 x_train,y_train, x_test,y_test,classes_names = read_data(input_dir)
-
 
 # wyswietlmy ile punktow jakiej klasy jest 
 print("\n")
@@ -74,8 +78,31 @@ print("\n")
 ### KLASYFIKACJA
 
 ## naive_bayes
-# definiujemy klasyfikator:
-n_b = GaussianNB()
+# definiujemy klasyfikator(w zaleznosci od tego co podalismy w data-type):
+if data_type == 'cat':
+    n_b = CategoricalNB()
+elif data_type == 'cont':
+    n_b = GaussianNB()
+elif data_type == 'bern':
+    n_b = BernoulliNB()
+elif data_type == 'multin':
+    n_b = MultinomialNB()
+elif data_type == 'mixed':
+    temp_list = disc_col.split(sep=",")
+    disc_columns = [int(i) for i in temp_list]
+
+    x_train = np.array(x_train)
+    y_train = np.array(y_train)
+    x_test = np.array(x_test)
+    y_test = np.array(y_test)
+    label_encoder = LabelEncoder()
+    for i in disc_columns:
+        x_train[i] = label_encoder.fit_transform(x_train[i])
+        x_test[i] = label_encoder.fit_transform(x_test[i])
+    n_b = MixedNB(categorical_features=disc_columns)
+
+
+
 
 # "uczymy" sie na zbiorze treningowym
 start_time = time.time()
@@ -102,7 +129,5 @@ else:
     
 print(classification_report(y_test, y_pred, target_names = target_nms))     
 
-
-
-
+########################################
 
