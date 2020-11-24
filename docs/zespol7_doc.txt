@@ -37,3 +37,32 @@ python scripts/z7_knn.py --input-dir datasets_prepared/haberman --k 5
 python scripts/z7_knn.py --input-dir datasets_prepared/connect4
 
 ########################################################################################################
+
+Skrypt: z7_lda.py
+Klasyfikuje dane u¿ywaj¹c klasyfikatora lda.
+
+Parametry:
+--input-dir: Œcie¿ka do folderu z przygotowanymi danymi
+--solver: wybór "solvera", domyœlnie='svd',
+	mo¿liwe wartoœci:
+          - 'svd': Singular value decomposition (default).
+            	Nie wylicza macierzy kowariancji, zalecany dla danych z du¿¹ iloœci¹ atrybutów
+          - 'lsqr': Least squares solution.
+          - 'eigen': Eigenvalue decomposition.
+            
+Przyk³adowe wywo³anie:
+python scripts/z7_lda.py --input-dir datasets_prepared/haberman --solver lsqr
+python scripts/z7_lda.py --input-dir datasets_prepared/connect4
+
+########################################################################################################
+
+Skrypt: z7_qda.py
+Klasyfikuje dane u¿ywaj¹c klasyfikatora qda.
+
+Parametry:
+--input-dir: Œcie¿ka do folderu z przygotowanymi danymi
+
+Przyk³adowe wywo³anie:
+python scripts/z7_qda.py --input-dir datasets_prepared/haberman 
+python scripts/z7_qda.py --input-dir datasets_prepared/connect4
+
