@@ -1,0 +1,39 @@
+Zespó³ 7
+
+########################################################################################################
+
+Skrypt: z7_naive_bayes.py
+Klasyfikuje dane u¿ywaj¹c Naiwnego klasyfikatora Bayesa.
+
+Parametry:
+--input-dir: Œcie¿ka do folderu z przygotowanymi danymi
+--data-type: Jakiego typ danymi s¹ atrybuty, domyœlnie cat
+	mo¿liwe typy:
+		cat[categorical]: kategoryczne, zmienne dyskretne
+		cont[continuous]: numeryczne, zmienne ci¹g³e
+		bern[Bernoulli]:  dyskretne, które przyjmuj¹ tylko dwie wartoœci (czêsto np. wartoœci Boolowskie)
+		multin[Multinomial]: atrybuty reprezentuj¹ czêstoœæ wystêpowania pewnych zdarzeñ 
+			(typowy przyk³ad: klasyfikacja dokumentów, gdzie zdarzenia to wyst¹pienia wyrazów w tekœcie)
+		mixed: gdy atrybuty to zmienne i dyskretne i ci¹g³e [UWAGA: ta opcja wymaga zainstalowania biblioteki "mixed_naive_bayes":
+			pip install git+https://github.com/remykarem/mixed-naive-bayes#egg=mixed_naive_bayes] # nie dzia³a na razie
+
+--disc-col: Numery kolumn (po przecinku, bez spacji), które s¹ dyskretne - podajemy gdy data_type to mixed
+
+Przyk³adowe wywo³anie:
+python scripts/z7_naive_bayes.py --input-dir datasets_prepared/haberman --data-type cat
+python scripts/z7_naive_bayes.py --input-dir datasets_prepared/connect4 --data-type cat
+
+########################################################################################################
+
+Skrypt: z7_knn.py
+Klasyfikuje dane u¿ywaj¹c klasyfikatora knn.
+
+Parametry:
+--input-dir: Œcie¿ka do folderu z przygotowanymi danymi
+--k: Liczba s¹siadów, domyœlnie k=3
+
+Przyk³adowe wywo³anie:
+python scripts/z7_knn.py --input-dir datasets_prepared/haberman --k 5
+python scripts/z7_knn.py --input-dir datasets_prepared/connect4
+
+########################################################################################################
