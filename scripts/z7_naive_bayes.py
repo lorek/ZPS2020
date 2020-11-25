@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
 import pickle 
 
 from sklearn.naive_bayes import GaussianNB, MultinomialNB, CategoricalNB, BernoulliNB
-from mixed_naive_bayes import MixedNB
+#from mixed_naive_bayes import MixedNB
 from sklearn.preprocessing import LabelEncoder
 
 
@@ -87,6 +87,7 @@ elif data_type == 'bern':
     n_b = BernoulliNB()
 elif data_type == 'multin':
     n_b = MultinomialNB()
+'''
 elif data_type == 'mixed':
     temp_list = disc_col.split(sep=",")
     disc_columns = [int(i) for i in temp_list]
@@ -101,7 +102,7 @@ elif data_type == 'mixed':
         x_test[i] = label_encoder.fit_transform(x_test[i])
     n_b = MixedNB(categorical_features=disc_columns)
 
-
+'''
 
 
 # "uczymy" sie na zbiorze treningowym
