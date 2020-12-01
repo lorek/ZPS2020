@@ -67,7 +67,7 @@ data_all = df.to_numpy()
 
 # pierwsze 5 kolumn to dane:
 
-data = data_all[:, :5]  # = wszystkie wiersze, kolumny bez ostatniej
+data = data_all[:, 1:]  # = wszystkie wiersze, kolumny bez ostatniej
 
 # ostatnia kolumna to klasy:
 
