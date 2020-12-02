@@ -1,0 +1,6 @@
+SkryptreliefF_z6.py służy do redukcji wymiaru poprzez wybór atrybutów. Do uruchomienia skryptu potrzebne są 4 parametry
+--input-dir - ścieżka do folderu z którego bierzemy dane przed redukcją
+--output-dir - ścieżka do folderu, w którym zapiszemy zredukowane dane (! folder musi już być stworzony )
+--n-neighbors - liczba sąsiadów do sprawdzenia w każdym kroku algorytmu,
+ dla większej liczby sąsiadów algorytm jest zazwyczaj dokładniejszy, ale jego wykonywanie trwa dłużej
+--n-features - liczba, która mówi do ilu wymiarów redukujemy (nie może być większa niż liczba klas)
