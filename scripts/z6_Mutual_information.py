@@ -1,6 +1,7 @@
 from sklearn import datasets, metrics, feature_selection
 from functools import partial
 import time
+import argparse
 import pickle
 
 def read_data(input_dir):
@@ -50,6 +51,24 @@ def save_data(x_train, y_train, x_test, y_test, classes_names, output_dir):
     print("Pickles saved in ", output_dir)
 
 
+def ParseArguments():
+    parser = argparse.ArgumentParser(description="Project")
+    parser.add_argument('--input-dir', default="", required=True, help='data dir (default: %(default)s)')
+    parser.add_argument('--output-dir', default="", required=True, help='output dir (default: %(default)s)')
+    parser.add_argument('--n', default="", required=True, help='output dir (default: %(default)s)')
+    args = parser.parse_args()
+
+    return args.input_dir, args.output_dir, args.n
+
+
+input_dir, output_dir, n_comp = ParseArguments()
+
+n_comp = int(n_comp)
+
+# wczytujemy dane
+x_train, y_train, x_test, y_test, classes_names = read_data(input_dir)
+
+''' jeśli też nie umiesz używać wiersza poleceń, zakomentuj od parseArguments i odkomentuj:
 input_dir = input("Adres pliku:")
 
 x_train,y_train, x_test,y_test,classes_names = read_data(input_dir)
@@ -58,15 +77,26 @@ print("Twoje dane mają rozmiar:",x_train.shape[1])
 
 n_comp = input('Nowy wymiar:')
 
+print('Gdzie chcesz zapisać wynik?')
+output_dir = input('Adres do zapisu:')
+'''
+
+print('Mutual Information reduction',x_train.shape[1],'->',n_comp)
+
 fs = feature_selection.SelectKBest(score_func=partial(feature_selection.mutual_info_classif, n_neighbors=3), k=int(n_comp))
+
+## wyuczenie macierzy tranformacji i zaaplikowanie jej na x_train
 start_time = time.time()
 x_train_reduced = fs.fit_transform(x_train,y_train)
 print("  took %s seconds " % round((time.time() - start_time),5))
+
+#zastosowanie tej samej macierzy na x_test
 x_test_reduced = fs.transform(x_test)
 
-print('Gdzie chcesz zapisać wynik?')
-output_dir = input('Adres do zapisu:')
+# zapisujemy dane
 save_data(x_train_reduced, y_train, x_test_reduced, y_test, classes_names, output_dir)
+
+# dodatkowo zapisujemy sam obiekt MI
 
 fs_object_file = open(output_dir+"/fs_IM_object.pkl", "wb")
 pickle.dump(fs,fs_object_file)

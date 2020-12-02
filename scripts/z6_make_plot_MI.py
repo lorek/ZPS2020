@@ -1,8 +1,9 @@
-from sklearn import datasets, metrics, feature_selection
+from sklearn import datasets
+from sklearn.feature_selection import SelectKBest, mutual_info_classif
 from functools import partial
 import time
 import pickle
-from pylab import plot, show, figure
+from pylab import show, figure
 
 def read_data(input_dir):
     # wczytujemy dane treningowe:
@@ -36,17 +37,15 @@ print("Twoje dane mają rozmiar:",x_train.shape[1])
 
 n_comp = 3
 
-fs = feature_selection.SelectKBest(score_func=partial(feature_selection.mutual_info_classif, n_neighbors=3), k=int(n_comp))
+fs = SelectKBest(score_func=partial(mutual_info_classif, n_neighbors=3), k=int(n_comp))
 start_time = time.time()
 x_train_reduced = fs.fit_transform(x_train,y_train)
 print("  took %s seconds " % round((time.time() - start_time),5))
 x_test_reduced = fs.transform(x_test)
 
-new = x_test_reduced
+new = x_train_reduced
+col = y_train
 fig = figure(figsize=(10,10))
 ax = fig.add_subplot(111,projection='3d')
-ax.scatter(new[:,0], new[:,1], new[:,2], c=y_test, marker ="x")
+ax.scatter(new[:,0], new[:,1], new[:,2], c=col, marker ="x")
 show()
-
-# ../ZPS2020/datasets_prepared/teaching_assistant_evaluation
-# ../ZPS2020/datasets_prepared/wine_new
