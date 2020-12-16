@@ -67,6 +67,18 @@ df = pd.read_table(input_dir+"/nursery.data", sep=",", header=None)
 
 #JEST 9 kolumn, ostatnia to klasyfikator
 
+# Integer encoding zachowujący porządek danych 
+int_enc = {0: {'usual':0, 'pretentious':1, 'great_pret':2},
+           1: {'proper':0, 'less_proper':1, 'improper':2, 'critical':3, 'very_crit':4},
+           2: {'complete':0, 'completed':1, 'incomplete':2, 'foster':3},
+           3: {'more': 3},
+           4: {'convenient':0, 'less_conv':1, 'critical':2},
+           5: {'convenient':0, 'inconv':1},
+           6: {'nonprob':0, 'slightly_prob':1, 'problematic':2},
+           7: {'recommended':0, 'priority':1, 'not_recom':2},
+          8: {'not_recom':0, 'recommend':1, 'very_recom':2, 'priority':3, 'spec_prior':4}}
+df = df.replace(int_enc)
+
 # Zamieniamy DataFrame (df) na macierz numpy
 
 data_all = df.to_numpy()

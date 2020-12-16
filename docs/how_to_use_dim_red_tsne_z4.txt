@@ -1,0 +1,16 @@
+Grupa: z4
+Członkowie: Łukasz Wróblewski, Michał Piotrowski
+
+### Skrypt: dim_red_tsne.py 
+Redukuje wymiar danych 
+
+Parametry:
+--input-dir: Ścieżka do folderu z danymi do zredukowania
+--output-dir: Ścieżka do wynikowego folderu
+--n: (domyślnie 3) Wymiar do którego redukujemy 
+--perplexity: (domyślnie 30) Parametr o którym można myśleć jako o liczbie najbliższych sąsiadów 
+--random_state: (domyślnie None) Ustawienie ziarna
+--init: (domyślnie 'random') Miejsce od którego zaczynamy optymalizować rozkład pstwa w zredukowanej przestrzeni, można ustawić 'pca'
+
+Uwagi: 
+- dane treningowe i testowe są łączone i jednocześnie redukowane 
