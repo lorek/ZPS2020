@@ -116,7 +116,7 @@ print("  took %s seconds " % round((time.time() - start_time), 5))
 
 # zastosowanie tej samej macierzy na x_test
 
-x_test_reduced = embedding.fit_transform(x_test)
+x_test_reduced = embedding.transform(x_test)
 
 # zapisujemy dane
 
