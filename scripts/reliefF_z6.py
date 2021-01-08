@@ -8,7 +8,7 @@ import pickle
 
 # Example:
 # python scripts/reliefF_z6.py --n-neighbors 5  --n-features 3 --input-dir datasets_prepared/wine
-#                                       --output-dir datasets_prepared/eine_reliefF3d
+#                                       --output-dir datasets_prepared/wine_reliefF3d
 
 
 
