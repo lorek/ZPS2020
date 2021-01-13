@@ -1,0 +1,77 @@
+cd 'C:\Users\zuzbrzo\studia\sem5\zps\ZPS2020'
+
+
+scripts\z6_Mutual_information.py --input-dir datasets_prepared\nursery\ --output-dir datasets_prepared\Mutual_info\nursery_3d\ --n 3
+
+scripts_learn\plot3dpoints.py --input-dir datasets_prepared\ANOVA\nursery_3d
+
+# redukcja wymiaru na zbiorze mushroom (liczba klas - 2, wymiar - 22)
+
+scripts\z6_Mutual_information.py --input-dir datasets_prepared\mushroom\ --output-dir datasets_prepared\Mutual_info\mushroom_3d\ --n 3
+scripts\z6_Mutual_information.py --input-dir datasets_prepared\mushroom\ --output-dir datasets_prepared\Mutual_info\mushroom_5d\ --n 5
+
+scripts_learn\plot3dpoints.py --input-dir datasets_prepared\ANOVA\mushroom_3d
+
+# działanie klasyfikatorów przed i po redukcji wymiaru
+
+# LDA
+scripts\z7_lda.py --input-dir datasets_prepared\mushroom
+scripts\z7_lda.py --input-dir datasets_prepared\Mutual_info\mushroom_3d
+
+# Naive Bayes
+scripts\z7_naive_bayes.py --input-dir datasets_prepared\mushroom
+scripts\z7_naive_bayes.py --input-dir datasets_prepared\Mutual_info\mushroom_3d
+scripts\z7_naive_bayes.py --input-dir datasets_prepared\Mutual_info\mushroom_5d
+
+
+# redukcja wymiaru na zbiorze adult (liczba klas - 2, wymiar - 14)
+
+scripts\z6_Mutual_information.py --input-dir datasets_prepared\adult\ --output-dir datasets_prepared\Mutual_info\adult_3d\ --n 3
+scripts\z6_Mutual_information.py --input-dir datasets_prepared\adult\ --output-dir datasets_prepared\Mutual_info\adult_5d\ --n 5
+
+scripts_learn\plot3dpoints.py --input-dir datasets_prepared\ANOVA\adult_3d
+
+# działanie klasyfikatorów przed i po redukcji wymiaru
+
+# LDA
+scripts\z7_lda.py --input-dir datasets_prepared\adult
+scripts\z7_lda.py --input-dir datasets_prepared\Mutual_info\adult_5d
+scripts\z7_lda.py --input-dir datasets_prepared\Mutual_info\adult_3d
+
+# Naive Bayes
+scripts\z7_naive_bayes.py --input-dir datasets_prepared\adult
+scripts\z7_naive_bayes.py --input-dir datasets_prepared\Mutual_info\adult_3d
+scripts\z7_naive_bayes.py --input-dir datasets_prepared\Mutual_info\adult_5d
+
+
+# QDA
+scripts\z7_qda.py --input-dir datasets_prepared\adult
+scripts\z7_qda.py --input-dir datasets_prepared\Mutual_info\adult_5d
+scripts\z7_qda.py --input-dir datasets_prepared\Mutual_info\adult_3d
+
+
+# KNN
+scripts\z7_knn.py --input-dir datasets_prepared\adult
+scripts\z7_knn.py --input-dir datasets_prepared\Mutual_info\adult_5d
+scripts\z7_knn.py --input-dir datasets_prepared\Mutual_info\adult_3d
+
+
+# redukcja wymiaru na zbiorze glass (liczba klas - 7, wymiar - 10)
+
+scripts\z6_anova_feature_selection.py --input-dir datasets_prepared\glass\ --output-dir datasets_prepared\Mutual_info\glass_3d\ --n 3
+scripts\z6_anova_feature_selection.py --input-dir datasets_prepared\glass\ --output-dir datasets_prepared\Mutual_info\glass_5d\ --n 5
+
+
+# działanie klasyfikatorów przed i po redukcji wymiaru
+
+# LDA
+scripts\z7_lda.py --input-dir datasets_prepared\glass
+scripts\z7_lda.py --input-dir datasets_prepared\Mutual_info\glass_5d
+scripts\z7_lda.py --input-dir datasets_prepared\Mutual_info\glass_3d
+
+
+
+# KNN
+scripts\z7_knn.py --input-dir datasets_prepared\glass
+scripts\z7_knn.py --input-dir datasets_prepared\Mutual_info\glass_5d
+scripts\z7_knn.py --input-dir datasets_prepared\Mutual_info\glass_3d
