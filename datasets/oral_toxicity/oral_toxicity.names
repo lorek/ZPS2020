@@ -1,0 +1,12 @@
+Data Set Information:
+
+This dataset was used to develop classification QSAR models for the discrimination of very toxic/positive (741) and not very toxic/negative (8251) molecules by means of different machine learning methods. Details can be found in the quoted reference: D. Ballabio, F. Grisoni, V. Consonni, R. Todeschini (2019), Integrated QSAR models to predict acute oral systemic toxicity, Molecular Informatics, 38, 180012; doi: 10.1002/minf.201800124.
+Attributes (molecular fingerprints) were calculated at the Milano Chemometrics and QSAR Research Group (UniversitÃ  degli Studi Milano - Bicocca, Milano, Italy) on a set of chemicals provided by the ICCVAM Acute Toxicity Workgroup (U.S. Department of Health and Human Services), in collaboration with the U.S. Environmental Protection Agency (U.S. EPA, National Center for Computational Toxicology), which coordinated the â€œPredictive Models for Acute Oral Systemic Toxicityâ€ collaborative project to develop in silico models to predict acute oral systemic toxicity for filling regulatory needs.
+
+
+Attribute Information:
+
+1024 binary molecular fingerprints and 1 experimental class:
+1-1024) binary molecular fingerprint
+1025) experimental class: positive (very toxic) and negative (not very toxic)
+
