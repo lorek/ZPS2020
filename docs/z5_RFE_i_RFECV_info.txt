@@ -1,0 +1,129 @@
+cd "C:\Studia_3\Zespołowy projekt specjalnosciowy\ZPS2020"
+
+## RFE
+
+# redukcja wymiaru na zbiorze glass (liczba klas - 7, wymiar - 10)
+
+python scripts\z5_RFE.py --input-dir datasets_prepared\glass\ --output-dir datasets_prepared\RFE\glass_3d\ --n 3
+python scripts\z5_RFE.py --input-dir datasets_prepared\glass\ --output-dir datasets_prepared\RFE\glass_5d\ --n 5
+
+
+# działanie klasyfikatorów przed i po redukcji wymiaru (glass)
+
+# LDA
+python scripts\z7_lda.py --input-dir datasets_prepared\glass
+python scripts\z7_lda.py --input-dir datasets_prepared\RFE\glass_3d
+python scripts\z7_lda.py --input-dir datasets_prepared\RFE\glass_5d
+
+# Naive Bayes
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\glass # nie działa
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\RFE\glass_3d
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\RFE\glass_5d 
+
+# QDA
+python scripts\z7_qda.py --input-dir datasets_prepared\glass
+python scripts\z7_qda.py --input-dir datasets_prepared\RFE\glass_3d
+python scripts\z7_qda.py --input-dir datasets_prepared\RFE\glass_5d # nie działa
+
+# KNN
+python scripts\z7_knn.py --input-dir datasets_prepared\glass
+python scripts\z7_knn.py --input-dir datasets_prepared\RFE\glass_3d
+python scripts\z7_knn.py --input-dir datasets_prepared\RFE\glass_5d
+
+
+# redukcja wymiaru na zbiorze mushroom (liczba klas - 3, wymiar - 42)
+
+python scripts\z5_RFE.py --input-dir datasets_prepared\mushroom\ --output-dir datasets_prepared\RFE\mushroom_3d\ --n 3 # dłuuugo
+python scripts\z5_RFE.py --input-dir datasets_prepared\mushroom\ --output-dir datasets_prepared\RFE\mushroom_7d\ --n 7
+
+
+# działanie klasyfikatorów przed i po redukcji wymiaru (mushroom)
+
+# LDA
+python scripts\z7_lda.py --input-dir datasets_prepared\mushroom
+python scripts\z7_lda.py --input-dir datasets_prepared\RFE\mushroom_3d
+python scripts\z7_lda.py --input-dir datasets_prepared\RFE\mushroom_7d
+
+# Naive Bayes
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\mushroom
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\RFE\mushroom_3d
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\RFE\mushroom_7d 
+
+# QDA
+python scripts\z7_qda.py --input-dir datasets_prepared\mushroom
+python scripts\z7_qda.py --input-dir datasets_prepared\RFE\mushroom_3d
+python scripts\z7_qda.py --input-dir datasets_prepared\RFE\mushroom_7d
+
+# KNN
+python scripts\z7_knn.py --input-dir datasets_prepared\mushroom
+python scripts\z7_knn.py --input-dir datasets_prepared\RFE\mushroom_3d
+python scripts\z7_knn.py --input-dir datasets_prepared\RFE\mushroom_7d
+
+# redukcja wymiaru na zbiorze wine (liczba klas - 3, wymiar - 42)
+
+python scripts\z5_RFE.py --input-dir datasets_prepared\wine\ --output-dir datasets_prepared\RFE\wine_2d\ --n 2
+python scripts\z5_RFE.py --input-dir datasets_prepared\wine\ --output-dir datasets_prepared\RFE\wine_3d\ --n 3
+python scripts\z5_RFE.py --input-dir datasets_prepared\wine\ --output-dir datasets_prepared\RFE\wine_5d\ --n 5
+
+# działanie klasyfikatorów przed i po redukcji wymiaru (wine)
+
+# LDA
+python scripts\z7_lda.py --input-dir datasets_prepared\wine
+python scripts\z7_lda.py --input-dir datasets_prepared\RFE\wine_2d
+python scripts\z7_lda.py --input-dir datasets_prepared\RFE\wine_3d
+python scripts\z7_lda.py --input-dir datasets_prepared\RFE\wine_5d
+
+# Naive Bayes
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\wine # nie działa
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\RFE\wine_2d
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\RFE\wine_3d # nie działa
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\RFE\wine_5d # nie działa
+
+# QDA
+python scripts\z7_qda.py --input-dir datasets_prepared\wine
+python scripts\z7_qda.py --input-dir datasets_prepared\RFE\wine_2d
+python scripts\z7_qda.py --input-dir datasets_prepared\RFE\wine_3d
+python scripts\z7_qda.py --input-dir datasets_prepared\RFE\wine_5d
+
+# KNN
+python scripts\z7_knn.py --input-dir datasets_prepared\wine
+python scripts\z7_knn.py --input-dir datasets_prepared\RFE\wine_2d
+python scripts\z7_knn.py --input-dir datasets_prepared\RFE\wine_3d
+python scripts\z7_knn.py --input-dir datasets_prepared\RFE\wine_5d
+
+## RFECV
+
+# redukcja wymiaru na zbiorze glass (liczba klas - 7, wymiar - 10)
+
+python scripts\z5_RFECV.py --input-dir datasets_prepared\glass\ --output-dir datasets_prepared\RFECV\glass_1d\ --n 1
+python scripts\z5_RFECV.py --input-dir datasets_prepared\glass\ --output-dir datasets_prepared\RFECV\glass_3d\ --n 3
+
+# działanie klasyfikatorów przed i po redukcji wymiaru (glass)
+
+# LDA
+python scripts\z7_lda.py --input-dir datasets_prepared\glass
+python scripts\z7_lda.py --input-dir datasets_prepared\RFECV\glass_1d
+python scripts\z7_lda.py --input-dir datasets_prepared\RFECV\glass_3d # widzimy, że dla 2 wymiarow lepiej niz dla 3
+
+# Naive Bayes
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\glass # nie działa
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\RFECV\glass_1d
+python scripts\z7_naive_bayes.py --input-dir datasets_prepared\RFECV\glass_3d 
+
+# QDA
+python scripts\z7_qda.py --input-dir datasets_prepared\glass
+python scripts\z7_qda.py --input-dir datasets_prepared\RFECV\glass_1d
+python scripts\z7_qda.py --input-dir datasets_prepared\RFECV\glass_3d
+
+# KNN
+python scripts\z7_knn.py --input-dir datasets_prepared\glass
+python scripts\z7_knn.py --input-dir datasets_prepared\RFECV\glass_1d 
+python scripts\z7_knn.py --input-dir datasets_prepared\RFECV\glass_3d # dokladnie ta sama skutecznosc dla 2 wymarow, 3 i 10
+
+
+# wykresy
+
+python scripts_learn\plot3dpoints.py --input-dir datasets_prepared\RFE\glass_3d
+python scripts_learn\plot3dpoints.py --input-dir datasets_prepared\RFE\wine_3d
+python scripts_learn\plot3dpoints.py --input-dir datasets_prepared\RFE\mushroom_3d
+
