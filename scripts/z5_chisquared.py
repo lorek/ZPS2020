@@ -38,7 +38,7 @@ def get_best_variables_index(n, X, y):
     return odp
 
 def new_array(index, X):
-    odp = X.take(index)
+    odp = X.take(index,1)
 
     return odp
 
@@ -70,7 +70,7 @@ y_test_new = y_test.copy()
 
 print("Redukcja wymiarów zajęła {} sekund".format(round(time.time() - start_time,5)))
 
-def save_data(x_train, y_train, x_test, y_test, output_dir,attributes):
+def save_data(x_train, y_train, x_test, y_test, output_dir,attributes,classes_names):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     x_train_all_dict = {'data': x_train,
@@ -89,4 +89,4 @@ def save_data(x_train, y_train, x_test, y_test, output_dir,attributes):
 
     print("Pickles saved in", output_dir,"with %d columns" % attributes)
 
-save_data(x_train_new, y_train_new, x_test_new, y_test_new, output_dir,attributes)
+save_data(x_train_new, y_train_new, x_test_new, y_test_new, output_dir,attributes,classes_names)
