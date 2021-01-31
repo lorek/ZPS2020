@@ -97,7 +97,7 @@ def run_script(input_dir, output_dir, categorical_features_indexes, smoothing: f
     x_test = transform_dataset(encoder, x_test)
 
     save_dataset(x_train, y_train, output_dir, "train_data.pkl")
-    save_dataset(x_test, y_test, output_dir, "train_data.pkl")
+    save_dataset(x_test, y_test, output_dir, "test_data.pkl")
     copy_dataset(input_dir, output_dir, "class_names.pkl")
 
 
