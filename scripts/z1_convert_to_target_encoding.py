@@ -4,8 +4,7 @@ Group: z1
 
 Example:
     $ python scripts/z1_convert_to_target_encoding.py --input-dir datasets_prepared/adult/ \
-        --output-dir datasets_prepared/adult_one_hot/ --categorical-features-indexes 0 1 2 3 4 5 6 7 8 \
-        --categorical-features-classes 5 5 5 5 5 5 5 5 5
+        --output-dir datasets_prepared/adult_one_hot/ --categorical-features-indexes 0 1 2 3 4 5 6 7 8
 """
 
 import argparse
