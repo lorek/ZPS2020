@@ -1,0 +1,4 @@
+Plik nmf_dim_red_z3.py służy do redukcji wymiaru. Podaje się w nim 3 rzeczy:
+--input-dir - ścieżkę do folderu z którego bierzemy dane przed redukcją
+--output-dir - ścieżkę do folderu, w którym zapiszemy zredukowane dane
+--n - liczbę, która mówi do ilu wymiarów redukujemy
